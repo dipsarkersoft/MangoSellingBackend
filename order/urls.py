@@ -11,7 +11,7 @@ urlpatterns = [
     path('review/',ReviewCreteView.as_view(), name='review'),
     path('review/list/',ReviewListView.as_view(), name='reviewlist'),
     path('payment/',PaymentView.as_view(), name='Payment_view'),
-    path('payment/success/<str:trans_id>/', paymentSucess,name='Payment_red'),
+    path('payment/success/<str:trans_id>', paymentSucess,name='Payment_red'),
     path('payment/failed/', paymentfailed,name='Payment_failed'),
 
 ]

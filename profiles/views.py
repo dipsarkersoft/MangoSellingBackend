@@ -19,8 +19,8 @@ from django.shortcuts import get_object_or_404
 
 env = environ.Env()
 environ.Env.read_env()
-base_url= env('BASE_URL')
-base_front= env('FRONT_URL')
+base_url=env('BASE_URL')
+base_front=env('FRONT_URL')
 
 class UserRegisterView(APIView):
     serializer_class=RegistrerSerializer

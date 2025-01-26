@@ -39,7 +39,7 @@ class OrderCreatView(APIView):
     permission_classes = [IsAuthenticated]
 
     def post(self, request):
-         print(request.data)
+         
          
         
          orders = [] 
@@ -96,7 +96,7 @@ class OrderCreatView(APIView):
                        'order':emdata,
                        'total':total                                     
                             })
-              print(serializer.data)
+              
               
               
 
@@ -104,7 +104,7 @@ class OrderCreatView(APIView):
               email.attach_alternative(e_body,'text/html')
               email.send()   
 
-         print(total)
+         
          return Response({
              "message": "Orders created successfully.",
              "status":'Sucess'
@@ -257,9 +257,9 @@ class PaymentView(APIView):
         post_body['total_amount'] = res['totalammount']
         post_body['currency'] = "BDT"
         post_body['tran_id'] = trans_id
-        post_body['success_url']=f"{B_URL}order/payment/success/{trans_id}/"
+        post_body['success_url']=f"{B_URL}order/payment/success/{trans_id}"
         post_body['fail_url'] =f"{B_URL}order/payment/failed/" 
-        post_body['cancel_url'] ="{B_URL}payment/failed"
+        post_body['cancel_url'] ="{B_URL}order/payment/failed/"
         post_body['emi_option'] = 0
         post_body['cus_name'] = "test"
         post_body['cus_email'] = request.user.email
@@ -276,8 +276,7 @@ class PaymentView(APIView):
 
 
         response = sslcz.createSession(post_body) 
-        print(response)
-
+        
         return Response({
             "message":"payment sucess",
             "data":response,
