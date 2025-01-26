@@ -261,9 +261,9 @@ class PaymentView(APIView):
         post_body['success_url']=f"{B_URL}success/{trans_id}/"
         # post_body['success_url']=f"{B_URL}order/payment/success/{trans_id}"
 
-        post_body['fail_url'] =f"{B_URL}success/failed/" 
+        post_body['fail_url'] =f"{B_URL}failed/" 
         # post_body['fail_url'] =f"{B_URL}order/payment/failed/" 
-        post_body['cancel_url'] =f"{B_URL}success/failed/"
+        post_body['cancel_url'] =f"{B_URL}failed/"
         post_body['emi_option'] = 0
         post_body['cus_name'] = "test"
         post_body['cus_email'] = request.user.email
