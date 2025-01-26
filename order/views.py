@@ -21,7 +21,7 @@ import environ
 env = environ.Env()
 environ.Env.read_env()
 F_URL= env('FRONT_URL')
-B_URL= env('BASE_URL')
+B_URL= "https://mangosellingbackend.onrender.com/order/payment/"
 S_ID= env('STORE_ID')
 S_PASS= env('STORE_PASS')
 
@@ -257,9 +257,13 @@ class PaymentView(APIView):
         post_body['total_amount'] = res['totalammount']
         post_body['currency'] = "BDT"
         post_body['tran_id'] = trans_id
-        post_body['success_url']=f"{B_URL}order/payment/success/{trans_id}"
-        post_body['fail_url'] =f"{B_URL}order/payment/failed/" 
-        post_body['cancel_url'] ="{B_URL}order/payment/failed/"
+
+        post_body['success_url']=f"{B_URL}success/{trans_id}/"
+        # post_body['success_url']=f"{B_URL}order/payment/success/{trans_id}"
+
+        post_body['fail_url'] =f"{B_URL}success/failed/" 
+        # post_body['fail_url'] =f"{B_URL}order/payment/failed/" 
+        post_body['cancel_url'] =f"{B_URL}success/failed/"
         post_body['emi_option'] = 0
         post_body['cus_name'] = "test"
         post_body['cus_email'] = request.user.email
