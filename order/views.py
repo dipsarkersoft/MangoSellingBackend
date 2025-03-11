@@ -20,8 +20,15 @@ import environ
 
 env = environ.Env()
 environ.Env.read_env()
+
 F_URL= env('FRONT_URL')
-B_URL= "https://mangosellingbackend.onrender.com/order/payment/"
+B_URL= env('BASE_URL')
+
+# B_URL="http://127.0.0.1:8000/order/payment/"
+# F_URL="http://localhost:5173/"
+
+
+
 S_ID= env('STORE_ID')
 S_PASS= env('STORE_PASS')
 
@@ -294,7 +301,7 @@ class PaymentView(APIView):
 
 @csrf_exempt
 async def paymentSucess(request, trans_id: str):
-    return redirect(f'{F_URL}payment/sucess/{trans_id}')
+    return redirect(f'{F_URL}payment/success/{trans_id}')
 
 
 @csrf_exempt
