@@ -31,6 +31,16 @@ class MangoListView(APIView):
             ).union(
                 mango.filter(description__icontains=search_query)  # Case-insensitive search for description
             ) 
+        
+        # paginator = PageNumberPagination()
+        # paginator.page_size = 1  
+        # result_page = paginator.paginate_queryset(mango, request)
+        # serializer = MangoSerializer(result_page, many=True)  
+        # return paginator.get_paginated_response({
+        #     'data': serializer.data,
+        #     'message': 'All Products'
+        # })
+        
         serializer=MangoSerializer(mango,many=True)
         return Response({
             'data':serializer.data,
