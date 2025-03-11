@@ -96,7 +96,7 @@ class OrderCreatView(APIView):
             else:
                 return Response(serializer.errors)
          if orders:
-              e_sub='Your Order Completed'
+              e_sub='Thanks For Your Order'
               
               e_body=render_to_string('sendemailcreate.html',
                       {  
@@ -164,7 +164,7 @@ class OrderUpdateDeleteView(APIView):
          if serializer.is_valid():           
             serializer.save()           
             if  serializer.validated_data.get('delivery_status') == "Completed":
-                e_sub='Your Order Completed'
+                e_sub='Your Order Has been Completed'
                 total_price = is_order.mango.price * is_order.quantity
                 e_body=render_to_string('sendOrderemail.html',{
                     'order':is_order,
