@@ -152,11 +152,13 @@ class UserUpdateView(APIView):
         return Response({
             "message": "User updated successfully.",
              'data':{
-                   "email": user.email,
+                    "email": user.email,
                     "first_name": user.first_name,
                     "last_name": user.last_name,
                     "mobile_no": user.userprofile.mobile_no,
-                    "address": user.userprofile.address
+                    "address": user.userprofile.address,
+                    "account_type":user.userprofile.account_type
+
              }
             
             })

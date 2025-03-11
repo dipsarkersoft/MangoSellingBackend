@@ -8,11 +8,14 @@ from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from categories.models import CategoriesModel
 from rest_framework.exceptions import NotFound
+from rest_framework.pagination import PageNumberPagination
+
 
 class MangoListView(APIView):
 
     def get(self, request):
         cat_id = request.query_params.get('cat_id', None)
+        search_query = request.query_params.get('search', None)
         if cat_id:
             try:
                 mango=MangoModels.objects.filter(categories_id=cat_id)
@@ -20,11 +23,20 @@ class MangoListView(APIView):
                 return Response({'message':"Category Not Found"})
         else:
             mango=MangoModels.objects.all()
+            
+        
+        if search_query:
+            mango = mango.filter(
+                name__icontains=search_query  # Case-insensitive search for name
+            ).union(
+                mango.filter(description__icontains=search_query)  # Case-insensitive search for description
+            ) 
         serializer=MangoSerializer(mango,many=True)
         return Response({
             'data':serializer.data,
             'message':'All Product '
-        })    
+        }) 
+      
 
 
 class MangoCreateView(APIView):
